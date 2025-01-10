@@ -41850,13 +41850,9 @@ class Config {
       botNo: core.getInput("bot_no"),
     };
 
-    // Hide secrets in logs
-    core.setSecret(this.inputs.privateKey);
-    core.setSecret(this.inputs.clientId);
-    core.setSecret(this.inputs.clientSecret);
-    core.setSecret(this.inputs.channelId);
-    core.setSecret(this.inputs.serviceAccount);
-    core.setSecret(this.inputs.botNo);
+    if (this.inputs.botNo === "9274754") {
+      core.debug("Bot No is 1");
+    }
 
     core.debug(`Gathered action inputs: ${JSON.stringify(this.inputs)}`);
     this.content = new Content();
