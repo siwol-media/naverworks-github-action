@@ -15,8 +15,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       '@siwol-media/naverworks-api':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.0.3
+        version: 1.0.3
     devDependencies:
       '@types/node':
         specifier: ^22.10.5
@@ -366,8 +366,8 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@siwol-media/naverworks-api@1.0.1':
-    resolution: {integrity: sha512-n0bebBqLg9woxpjM0L2kMjU5Nr5etSkhaYhhNk6oG1j7nBYExBEIc1ZWhLYZp289CR4qvhYii8wOATt3SyuHPQ==, tarball: https://npm.pkg.github.com/download/@siwol-media/naverworks-api/1.0.1/6d8ade53c7c1c14a61342c173c4999eee610bbcb}
+  '@siwol-media/naverworks-api@1.0.3':
+    resolution: {integrity: sha512-azQC4Ys26jses4YETAYL7CGPCThWHCKxm1PMDN6bfVH8is4ssYlziQVpR/a/wGrXH8FRJZYW99LJvNGReKjNFA==, tarball: https://npm.pkg.github.com/download/@siwol-media/naverworks-api/1.0.3/6e719c3a0d69c3d04d3e2d9b4f55bfb5f3dd2dee}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1725,7 +1725,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@siwol-media/naverworks-api@1.0.1':
+  '@siwol-media/naverworks-api@1.0.3':
     dependencies:
       axios: 1.7.9
       eventemitter3: 5.0.1
