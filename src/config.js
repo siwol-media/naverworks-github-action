@@ -1,11 +1,10 @@
-import webapi from "@siwol-media/naverworks-api";
+import * as webapi from "@siwol-media/naverworks-api";
 import Content from "./content.js";
 
 /**
  * @see {@link ../action.yml}
  */
 export default class Config {
-
   /**
    * @typedef Inputs
    * @property {string} privateKey - Private Key
