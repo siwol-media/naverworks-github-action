@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "build": "ncc build src/index.js --license licenses.txt --source-map",
     "start": "node dist/index.js",
