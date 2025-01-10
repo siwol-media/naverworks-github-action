@@ -51,10 +51,6 @@ export default class Config {
       botNo: core.getInput("bot_no"),
     };
 
-    if (this.inputs.botNo === "9274754") {
-      core.debug("Bot No is 1");
-    }
-
     core.debug(`Gathered action inputs: ${JSON.stringify(this.inputs)}`);
     this.content = new Content();
     core.debug(`Gathered content: ${JSON.stringify(this.content)}`);

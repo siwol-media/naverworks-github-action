@@ -15,7 +15,7 @@ export default class Client {
       privateKey: config.inputs.privateKey,
     });
     try {
-      config.core.debug(`Sending message: ${config.content.getMessage()}`);
+      config.core.debug(`Sending message: ${JSON.stringify(config.content.getMessage())}`);
       const response = await client.sendMessage(config.content.getMessage());
 
       if (response.status === 201) {
