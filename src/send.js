@@ -1,7 +1,7 @@
 import core from "@actions/core";
-import Config from "./config";
-import Client from "./client";
-import NaverWorksError from "./error";
+import Config from "./config.js";
+import Client from "./client.js";
+import NaverWorksError from "./error.js";
 
 /**
  * Orchestrate the action job happenings from inputs to logic to outputs.

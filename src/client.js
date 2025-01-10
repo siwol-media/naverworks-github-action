@@ -1,5 +1,5 @@
-import Config from "./config";
-import NaverWorksError from "./error";
+import Config from "./config.js";
+import NaverWorksError from "./error.js";
 
 
 export default class Client {

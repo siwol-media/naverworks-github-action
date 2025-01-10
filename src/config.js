@@ -1,5 +1,5 @@
 import webapi from "@siwol-media/naverworks-api";
-import Content from "./content";
+import Content from "./content.js";
 
 /**
  * @see {@link ../action.yml}

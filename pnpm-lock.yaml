@@ -21,6 +21,9 @@ importers:
       '@vercel/ncc':
         specifier: ^0.38.3
         version: 0.38.3
+      axios:
+        specifier: ^1.7.9
+        version: 1.7.9
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.10.5)
