@@ -51,6 +51,14 @@ export default class Config {
       botNo: core.getInput("bot_no"),
     };
 
+    // Hide secrets in logs
+    core.setSecret(this.inputs.privateKey);
+    core.setSecret(this.inputs.clientId);
+    core.setSecret(this.inputs.clientSecret);
+    core.setSecret(this.inputs.channelId);
+    core.setSecret(this.inputs.serviceAccount);
+    core.setSecret(this.inputs.botNo);
+
     core.debug(`Gathered action inputs: ${JSON.stringify(this.inputs)}`);
     this.content = new Content();
     core.debug(`Gathered content: ${JSON.stringify(this.content)}`);

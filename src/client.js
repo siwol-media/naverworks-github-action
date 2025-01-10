@@ -1,7 +1,6 @@
 import Config from "./config.js";
 import NaverWorksError from "./error.js";
 
-
 export default class Client {
   /**
    * @param {Config} config - Configuration object.
@@ -16,9 +15,10 @@ export default class Client {
       privateKey: config.inputs.privateKey,
     });
     try {
+      config.core.debug(`Sending message: ${config.content.getMessage()}`);
       const response = await client.sendMessage(config.content.getMessage());
 
-      if(response.status === 201) {
+      if (response.status === 201) {
         config.core.setOutput("ok", true);
         config.core.info("Message sent successfully");
       } else {
