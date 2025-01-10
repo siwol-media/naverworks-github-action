@@ -16,6 +16,9 @@ export default class Content {
   getMessage() {
     // create message
     const { payload, ref } = this.values;
+
+    // organization 이름
+    const organization = payload?.repository?.owner?.login || "unknown-organization";
     // repository 이름
     const repository = payload?.repository?.name || "unknown-repo";
     // 브랜치 이름 (refs/heads/main => main)
@@ -24,8 +27,10 @@ export default class Content {
     const author = payload?.head_commit?.author?.username || "unknown-author";
     // 커밋 메시지
     const commitMessage = payload?.head_commit?.message || "No commit message";
+    // 커밋 해시
+    const commitHash = payload?.head_commit?.id || "unknown-commit-hash";
     // 커밋 URL
-    const commitUrl = payload?.head_commit?.url || "#";
+    const commitUrl = payload?.head_commit?.url || `https://github.com/${organization}/${repository}/commit/${commitHash}`;
 
     const authorName = author;
 
