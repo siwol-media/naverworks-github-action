@@ -2,7 +2,7 @@
   "name": "naverworks-github-action",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "ncc build src/index.js --license licenses.txt --source-map",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^22.10.5",
     "@vercel/ncc": "^0.38.3",
     "axios": "^1.7.9",
     "jest": "^29.7.0"

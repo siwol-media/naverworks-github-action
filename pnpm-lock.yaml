@@ -18,6 +18,9 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
     devDependencies:
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.10.5
       '@vercel/ncc':
         specifier: ^0.38.3
         version: 0.38.3
