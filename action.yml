@@ -1,0 +1,29 @@
+name: "NaverWorks Push Notification"
+description: "Push Notification to NaverWorks"
+inputs:
+  private_key:
+    description: "Private Key"
+    required: true
+  client_id:
+    description: "Client ID"
+    required: true
+  client_secret:
+    description: "Client Secret"
+    required: true
+  channel_id:
+    description: "Channel ID"
+    required: true
+  service_account:
+    description: "Service Account"
+    required: true
+  bot_no:
+    description: "Bot No"
+    required: true
+outputs:
+  ok:
+    description: "If the request completed without returning errors."
+  time:
+    description: "The Unix epoch time that the step completed."
+runs:
+  using: "node20"
+  main: "dist/index.js"
