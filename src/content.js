@@ -24,7 +24,7 @@ export default class Content {
     // 브랜치 이름 (refs/heads/main => main)
     const branch = ref?.split("/").pop() || "unknown-branch";
     // 작성자 이름 (GitHub username)
-    const author = payload?.head_commit?.author?.username || "unknown-author";
+    const author = payload?.head_commit?.author?.username || payload?.head_commit?.author?.name || "unknown-author";
     // 커밋 메시지
     const commitMessage = payload?.head_commit?.message || "No commit message";
     // 커밋 해시
