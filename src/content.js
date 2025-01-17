@@ -15,7 +15,7 @@ export default class Content {
    */
   branchMap = {
     main: "실섭",
-    develop: "개발섭",
+    dev: "개발섭",
   };
 
   constructor() {
@@ -43,15 +43,15 @@ export default class Content {
 
     const branch = branchName ? (this.branchMap[branchName] || branchName) : "unknown-branch";
     // 작성자 이름 (GitHub username)
-    const author = payload?.head_commit?.author?.username || payload?.head_commit?.author?.name || "unknown-author";
+    const authorName = payload?.head_commit?.author?.username || payload?.head_commit?.author?.name || "unknown-author";
+
+    const author = this.authorMap[authorName] || authorName;
     // 커밋 메시지
     const commitMessage = payload?.head_commit?.message || "No commit message";
     // 커밋 해시
     const commitHash = payload?.head_commit?.id || "unknown-commit-hash";
     // 커밋 URL
     const commitUrl = payload?.head_commit?.url || `https://github.com/${organization}/${repository}/commit/${commitHash}`;
-
-    const authorName = author;
 
     return {
       content: {
@@ -133,7 +133,7 @@ export default class Content {
                             },
                             {
                               type: "text",
-                              text: authorName,
+                              text: author,
                               size: "sm",
                               margin: "md",
                               flex: 5,
