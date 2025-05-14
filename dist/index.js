@@ -35281,7 +35281,7 @@ __nccwpck_require__.d(common_utils_namespaceObject, {
   origin: () => (origin)
 });
 
-// NAMESPACE OBJECT: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.3/node_modules/@siwol-media/naverworks-api/dist/index.js
+// NAMESPACE OBJECT: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.5/node_modules/@siwol-media/naverworks-api/dist/index.js
 var dist_namespaceObject = {};
 __nccwpck_require__.r(dist_namespaceObject);
 __nccwpck_require__.d(dist_namespaceObject, {
@@ -35291,12 +35291,6 @@ __nccwpck_require__.d(dist_namespaceObject, {
 // EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
 var core = __nccwpck_require__(9999);
 var core_namespaceObject = /*#__PURE__*/__nccwpck_require__.t(core, 2);
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.3/node_modules/@siwol-media/naverworks-api/dist/config.js
-const JWTHeader = {
-    alg: "RS256",
-    typ: "JWT",
-};
-
 ;// CONCATENATED MODULE: external "node:crypto"
 const external_node_crypto_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:crypto");
 ;// CONCATENATED MODULE: external "node:buffer"
@@ -41565,71 +41559,113 @@ axios.default = axios;
 // this module should only have a default export
 /* harmony default export */ const lib_axios = (axios);
 
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.3/node_modules/@siwol-media/naverworks-api/dist/WebClient.js
+;// CONCATENATED MODULE: ./node_modules/.pnpm/axios@1.7.9/node_modules/axios/index.js
+
+
+// This module is intended to unwrap Axios default export as named.
+// Keep top-level export same with static properties
+// so that it can keep same with es module or cjs
+const {
+  Axios: axios_Axios,
+  AxiosError: axios_AxiosError,
+  CanceledError: axios_CanceledError,
+  isCancel: axios_isCancel,
+  CancelToken: axios_CancelToken,
+  VERSION: axios_VERSION,
+  all: axios_all,
+  Cancel,
+  isAxiosError: axios_isAxiosError,
+  spread: axios_spread,
+  toFormData: axios_toFormData,
+  AxiosHeaders: axios_AxiosHeaders,
+  HttpStatusCode: axios_HttpStatusCode,
+  formToJSON,
+  getAdapter,
+  mergeConfig: axios_mergeConfig
+} = lib_axios;
 
 
 
-class WebClient {
-    constructor(config) {
-        this.config = config;
-        this.accessToken = "";
-        this.claimSet = this.createClaimSet(this.config);
-    }
-    async initialize() {
-        this.accessToken = await this.getAccessToken();
-        return this.accessToken;
-    }
-    async sendMessage(message) {
-        await this.ensureAccessToken();
-        const config = this.config;
-        const response = await lib_axios.post(`https://www.worksapis.com/v1.0/bots/${config.botNo}/channels/${config.channelId}/messages`, message, { headers: { Authorization: `Bearer ${this.accessToken}`, "Content-Type": "application/json" } });
-        return response;
-    }
-    createClaimSet(config) {
-        return {
-            iss: config.clientId,
-            sub: config.serviceAccount,
-            iat: Math.floor(Date.now() / 1000),
-            exp: Math.floor(Date.now() / 1000) + 60 * 60,
-        };
-    }
-    async createJWT(config) {
-        const claimSet = this.claimSet;
-        const privateKeyObject = await importPKCS8(config.privateKey, "RS256");
-        const signature = await new SignJWT(claimSet).setProtectedHeader(JWTHeader).sign(privateKeyObject);
-        return signature;
-    }
-    async getAccessToken() {
-        const config = this.config;
-        const jwt = await this.createJWT(config);
-        const params = new URLSearchParams({
-            grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-            assertion: jwt,
-            client_id: config.clientId,
-            client_secret: config.clientSecret,
-            scope: "bot",
-        });
-        const response = await lib_axios.post("https://auth.worksmobile.com/oauth2/v2.0/token", params.toString(), {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-        });
-        return response.data.access_token;
-    }
-    async ensureAccessToken() {
-        if (!this.accessToken || this.isTokenExpired()) {
-            this.accessToken = await this.getAccessToken();
-        }
-    }
-    isTokenExpired() {
-        const claimSet = this.claimSet;
-        return claimSet.exp < Math.floor(Date.now() / 1000);
-    }
-}
+;// CONCATENATED MODULE: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.5/node_modules/@siwol-media/naverworks-api/dist/index.js
+// src/config.ts
+var JWTHeader = {
+  alg: "RS256",
+  typ: "JWT"
+};
 
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@siwol-media+naverworks-api@1.0.3/node_modules/@siwol-media/naverworks-api/dist/index.js
+// src/WebClient.ts
 
 
+var WebClient = class {
+  constructor(config) {
+    this.config = config;
+    this.accessToken = "";
+    this.claimSet = this.createClaimSet(this.config);
+  }
+  async initialize() {
+    this.accessToken = await this.getAccessToken();
+    return this.accessToken;
+  }
+  async sendMessage(message) {
+    try {
+      await this.ensureAccessToken();
+      const config = this.config;
+      const response = await lib_axios.post(`https://www.worksapis.com/v1.0/bots/${config.botNo}/channels/${config.channelId}/messages`, message, { headers: { Authorization: `Bearer ${this.accessToken}`, "Content-Type": "application/json" } });
+      if (response.status >= 400) {
+        throw new Error(`Failed to send message: ${response.statusText}`);
+      }
+      return response;
+    } catch (error) {
+      if (error instanceof axios_AxiosError) {
+        const data = error.response?.data;
+        throw new Error(`${data.code}: ${data.description}`);
+      }
+      throw error;
+    }
+  }
+  createClaimSet(config) {
+    return {
+      iss: config.clientId,
+      sub: config.serviceAccount,
+      iat: Math.floor(Date.now() / 1e3),
+      exp: Math.floor(Date.now() / 1e3) + 60 * 60
+    };
+  }
+  async createJWT(config) {
+    const claimSet = this.claimSet;
+    const privateKeyObject = await importPKCS8(config.privateKey, "RS256");
+    const signature = await new SignJWT(claimSet).setProtectedHeader(JWTHeader).sign(privateKeyObject);
+    return signature;
+  }
+  async getAccessToken() {
+    const config = this.config;
+    const jwt = await this.createJWT(config);
+    const params = new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: jwt,
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      scope: "bot"
+    });
+    const response = await lib_axios.post("https://auth.worksmobile.com/oauth2/v2.0/token", params.toString(), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    });
+    return response.data.access_token;
+  }
+  async ensureAccessToken() {
+    if (!this.accessToken || this.isTokenExpired()) {
+      this.accessToken = await this.getAccessToken();
+    }
+  }
+  isTokenExpired() {
+    const claimSet = this.claimSet;
+    return claimSet.exp < Math.floor(Date.now() / 1e3);
+  }
+};
+
+//# sourceMappingURL=index.js.map
 // EXTERNAL MODULE: ./node_modules/.pnpm/@actions+github@6.0.0/node_modules/@actions/github/lib/github.js
 var github = __nccwpck_require__(2819);
 ;// CONCATENATED MODULE: ./src/content.js
